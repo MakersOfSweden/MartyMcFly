@@ -6,7 +6,6 @@ from datetime import datetime, date
 
 import flask , flask.views
 from flask import request
-import json
 
 app = flask.Flask(__name__)
 
@@ -25,7 +24,7 @@ class View(flask.views.MethodView):
         return haxx  
 
     def put(self):
-        parsed_json = json.loads(request.get_data(as_text=True))
+        parsed_json = request.json
         temp = datetime.now()
         con = lite.connect('fluxCapacitor.db',detect_types=lite.PARSE_DECLTYPES) 
         with con:           
