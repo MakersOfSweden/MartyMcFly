@@ -25,13 +25,13 @@ class View(flask.views.MethodView):
         return haxx  
 
     def put(self):
-        parsed_json = json.loads(request.data)
+        parsed_json = json.loads(request.get_data(as_text=True))
         temp = datetime.now()
         con = lite.connect('fluxCapacitor.db',detect_types=lite.PARSE_DECLTYPES) 
         with con:           
             cur = con.cursor()           
             cur.execute("INSERT INTO logs(memberName,action,timestamp) VALUES (?,?,?);",(parsed_json['who'],parsed_json['what'],temp))
-        print "'Put " + parsed_json['who'] + "' in logs with action '" + parsed_json['what'] + "' at time " + str(temp)
+        print ("'Put " + parsed_json['who'] + "' in logs with action '" + parsed_json['what'] + "' at time " + str(temp))
         return "nothing"
 
 app.add_url_rule('/',view_func=View.as_view('main'))
