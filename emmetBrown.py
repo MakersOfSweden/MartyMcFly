@@ -4,17 +4,15 @@ import pdb
 import csv
 
 # define the data range
-print("-------- Defining the processing range --------")
+print (" Defining the processing range ".center(80, "-"))
 startYear = int(input("year:"))
 startMonth = int(input("month:"))
 startDate = datetime.date(startYear,startMonth,1)
-#endDate = datetime.date.today()-datetime.timedelta(days=1)
 endDate = datetime.date(startYear,startMonth+1,1)
 diffDays = endDate-startDate
-print('calculating for %i days' % diffDays.days)
-print("between "+startDate.strftime('%Y-%m-%d') + " and "+ endDate.strftime('%Y-%m-%d'))
-print("-------- inputs defined, calculating ----------")
-
+print ('calculating for %i days' % diffDays.days)
+print ("between "+startDate.strftime('%Y-%m-%d') + " and "+ endDate.strftime('%Y-%m-%d'))
+print (" inputs defined, calculating ".center(80, "-"))
 # get the important part from the logs databace
 rows = list();
 con = lite.connect('fluxCapacitor.db',detect_types=lite.PARSE_DECLTYPES)
@@ -105,7 +103,7 @@ for day in range(diffDays.days):
             daysToPrint[day] = True           
 
 # pritn adiquit blanks and dates
-print ('------------------------ output ----------------------------\n')
+print (' output '.center(80, "-"))
 print ('               ', end="")# 15 blanks
 for day in range(diffDays.days):
     if daysToPrint[day]:
